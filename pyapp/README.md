@@ -1,9 +1,17 @@
 # pyapp
 
 ## Run
+
+### Python
 ```shell
 $ pip install pip --upgrade
 $ pip install -r requirements.txt
-$ flask run -h 0.0.0.0 -p 3000 &
+$ python app.py &
 $ curl localhost:3000
+```
+
+### Docker
+```shell
+$ docker build -t dev-sareno/pyapp .
+$ docker run dev-sareno/pyapp
 ```
