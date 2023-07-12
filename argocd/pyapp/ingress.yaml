@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pyapp
+  annotations:
+    # add an annotation indicating the issuer to use.
+    cert-manager.io/cluster-issuer: letsencrypt-issuer
+    # disable redirect, Cloudflare will handle it
+    ingress.kubernetes.io/force-ssl-redirect: "false"
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: pyapp.sareno.dev
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: pyapp
+            port:
+              number: 8001
+  tls:
+  - hosts:
+    - pyapp.sareno.dev
+    secretName: pyapp.sareno.dev
