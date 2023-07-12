@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: pyapp
+  name: pyapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pyapp
+  template:
+    metadata:
+      labels:
+        app: pyapp
+      annotations:
+        # prometheus scrape config
+        prometheus.io/scrape: "true"
+        prometheus.io/path: /
+        prometheus.io/port: "9090"
+    spec:
+      containers:
+      - image: devsareno/pyapp:0.1-arm64
+        name: pyapp
+        ports:
+        - containerPort: 8001
