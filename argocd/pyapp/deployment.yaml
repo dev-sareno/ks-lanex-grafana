@@ -20,7 +20,7 @@ spec:
         prometheus.io/port: "3000"
     spec:
       containers:
-      - image: devsareno/pyapp:0.1-arm64
+      - image: devsareno/pyapp:0.2-arm64
         name: pyapp
         ports:
         - containerPort: 3000
