@@ -1,10 +1,15 @@
 from flask import Flask
-from prometheus_client import start_http_server
+from werkzeug.middleware.dispatcher import DispatcherMiddleware
+from prometheus_client import make_wsgi_app
 import manager
 
 
 app = Flask(__name__)
 
+# Add prometheus wsgi middleware to route /metrics requests
+app.wsgi_app = DispatcherMiddleware(app.wsgi_app, {
+    '/metrics': make_wsgi_app()
+})
 
 def get_base():
     return "Hello, World!"
@@ -17,9 +22,3 @@ def hello():
 @app.route("/api/slow")
 def slow():
     return manager.get_slow()
-
-
-if __name__ == "__main__":
-    # Start up the server to expose the metrics.
-    start_http_server(9090)
-    app.run(debug=False, host="0.0.0.0", port=8001)
