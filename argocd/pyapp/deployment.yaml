@@ -16,12 +16,11 @@ spec:
       annotations:
         # prometheus scrape config
         prometheus.io/scrape: "true"
-        prometheus.io/path: /
-        prometheus.io/port: "9090"
+        prometheus.io/path: /metrics
+        prometheus.io/port: "3000"
     spec:
       containers:
       - image: devsareno/pyapp:0.1-arm64
         name: pyapp
         ports:
-        - containerPort: 8001
-        - containerPort: 9090
+        - containerPort: 3000

@@ -1,6 +1,5 @@
 FROM python:3.11.4-bullseye
-EXPOSE 8001
-EXPOSE 9090
+EXPOSE 3000
 WORKDIR /app
 COPY . .
 RUN pip install pip --upgrade

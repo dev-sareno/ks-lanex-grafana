@@ -19,7 +19,7 @@ spec:
           service:
             name: pyapp
             port:
-              number: 8001
+              number: 3000
   tls:
   - hosts:
     - pyapp.sareno.dev
