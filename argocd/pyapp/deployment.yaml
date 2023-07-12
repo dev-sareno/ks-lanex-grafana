@@ -24,3 +24,4 @@ spec:
         name: pyapp
         ports:
         - containerPort: 8001
+        - containerPort: 9090
