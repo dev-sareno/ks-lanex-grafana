@@ -1,0 +1,11 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: jsapp.sareno.dev
+spec:
+  secretName: jsapp.sareno.dev
+  issuerRef:
+    name: letsencrypt-issuer
+    kind: ClusterIssuer
+  dnsNames:
+  - jsapp.sareno.dev
