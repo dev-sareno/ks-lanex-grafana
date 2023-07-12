@@ -5,4 +5,4 @@ WORKDIR /app
 COPY . .
 RUN pip install pip --upgrade
 RUN pip install -r requirements.txt
-CMD ["python", "app.py"]
+CMD ["uwsgi", "--http", "0.0.0.0:3000", "--wsgi-file", "app.py", "--callable app"]
