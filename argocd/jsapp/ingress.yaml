@@ -21,6 +21,6 @@ spec:
             port:
               number: 3000
   tls:
-    hosts:
+  - hosts:
     - jsapp.sareno.dev
     secretName: jsapp.sareno.dev
