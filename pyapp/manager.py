@@ -4,12 +4,12 @@ from prometheus_client import Summary
 
 
 # Create a metric to track time spent and requests made.
-GET_HELLO_REQUEST_TIME = Summary('get_hello_seconds', 'Time spent processing GET / request')
-GET_SLOW_REQUEST_TIME = Summary('get_slow_seconds', 'Time spent processing GET /api/slow request')
+PYAPP_SAMPLE_METRIC_NO_LABELS = Summary('pyapp_sample_metric_no_labels', 'Time spent processing API request')
+PYAPP_SAMPLE_METRIC = Summary('pyapp_sample_metric', 'Time spent processing API request', ['path'])
 
 # Method A: using decorator
 # Decorate function with metric.
-@GET_HELLO_REQUEST_TIME.time()
+@PYAPP_SAMPLE_METRIC_NO_LABELS.time()
 def get_hello():
     return "Hello, World!"
 
@@ -25,7 +25,22 @@ def get_slow():
 
     # PROMETHEUS: end tracking time
     time_taken = time.time() - start
-    GET_SLOW_REQUEST_TIME.observe(time_taken)
+    PYAPP_SAMPLE_METRIC.labels('/api/slow').observe(time_taken)
 
     return f"I slept for {v} seconds!"
+
+
+def get_fast():
+    # Method B: manual
+    # PROMETHEUS: start tracking time
+    start = time.time()
+
+    # actual logic
+    response = 'This is fast responding API!'
+
+    # PROMETHEUS: end tracking time
+    time_taken = time.time() - start
+    PYAPP_SAMPLE_METRIC.labels('/api/fast').observe(time_taken)
+
+    return response
 

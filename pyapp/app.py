@@ -22,3 +22,8 @@ def hello():
 @app.route("/api/slow")
 def slow():
     return manager.get_slow()
+
+
+@app.route("/api/fast")
+def fast():
+    return manager.get_fast()
