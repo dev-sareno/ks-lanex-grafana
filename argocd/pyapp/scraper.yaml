@@ -18,6 +18,6 @@ spec:
       - command:
         - /bin/bash
         - -c
-        - while [[ TRUE  ]]; do curl -s https://pyapp.sareno.dev/ || true && curl -s https://pyapp.sareno.dev/api/slow || true && curl -s https://pyapp.sareno.dev/api/fast || true && sleep 5; done
+        - while [[ TRUE  ]]; do curl https://pyapp.sareno.dev/ || true && curl https://pyapp.sareno.dev/api/slow || true && curl https://pyapp.sareno.dev/api/fast || true && sleep 5; done
         image: nginx
         name: nginx
