@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: pyapp-scraper
+  name: pyapp-scraper
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pyapp-scraper
+  template:
+    metadata:
+      labels:
+        app: pyapp-scraper
+    spec:
+      containers:
+      - command:
+        - /bin/bash
+        - -c
+        - while [[ TRUE  ]]; do curl -s https://pyapp.sareno.dev/ || true && curl -s https://pyapp.sareno.dev/api/slow || true && curl -s https://pyapp.sareno.dev/api/fast || true && sleep 5; done
+        image: nginx
+        name: nginx
