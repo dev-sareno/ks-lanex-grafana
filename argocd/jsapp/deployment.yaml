@@ -5,7 +5,7 @@ metadata:
     app: jsapp
   name: jsapp
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: jsapp
